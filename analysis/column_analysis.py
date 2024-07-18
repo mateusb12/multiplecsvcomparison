@@ -1,7 +1,7 @@
 import glob
 import os
 import pandas as pd
-from path.csv_loader import get_csv_folder_location, get_final_csv_folder_location
+from path.csv_loader import get_csv_folder_location, get_final_csv_folder_location, get_root_folder_location
 
 
 def compute_differences(input_df: pd.DataFrame, col_f: int, col_h: int, col_k: int,
@@ -35,15 +35,16 @@ def check_for_interruptions(input_df: pd.DataFrame, col_h: int, col_k: int) -> b
     Checks for interruptions by looking for negative numbers in columns H or K.
     - Returns True if any negative numbers are found, indicating an interruption
     """
-    col_h_name = input_df.columns[col_h]
-    col_k_name = input_df.columns[col_k]
+    if col_h >= len(input_df.columns) or col_k >= len(input_df.columns):
+        print(f"Invalid column index: col_h={col_h}, col_k={col_k} for DataFrame with columns {input_df.columns}")
+        return True  # Consider it an interruption if the indices are invalid
 
-    if (input_df[col_h_name] < 0).any() or (input_df[col_k_name] < 0).any():
+    if (input_df.iloc[:, col_h] < 0).any() or (input_df.iloc[:, col_k] < 0).any():
         return True
     return False
 
 
-def aggregate_differences(folder_path: str, col_f: int, col_h: int, col_k: int, comparison_range: int):
+def aggregate_differences(folder_path: str, col_f: int, col_h: int, col_k: int, comparison_range: int) -> list:
     """
     Aggregates differences from all files and finds common differences matching the specified range.
     - Computes differences for each file
@@ -61,7 +62,7 @@ def aggregate_differences(folder_path: str, col_f: int, col_h: int, col_k: int, 
             continue
 
         if check_for_interruptions(df, col_h, col_k):
-            print(f"File {file} contains interruptions and will be skipped.")
+            all_differences.append((os.path.basename(file), "interrupted", comparison_range, None, None, None, None))
             continue
 
         differences_df = compute_differences(df, col_f, col_h, col_k, comparison_range)
@@ -70,7 +71,8 @@ def aggregate_differences(folder_path: str, col_f: int, col_h: int, col_k: int, 
             diff = row['Difference']
             p1_value = row[df.columns[col_h]]
             p2_value = row[df.columns[col_k]]
-            all_differences.append((os.path.basename(file), idx, diff, p1_value, p2_value))
+            all_differences.append(
+                (os.path.basename(file), "success", comparison_range, diff, int(idx), p1_value, p2_value))
 
     return all_differences
 
@@ -79,16 +81,23 @@ def analysis_pipeline(col_f: int, col_h: int, col_k: int, target_range: int):
     folder_path = str(get_final_csv_folder_location())
     common_differences = aggregate_differences(folder_path, col_f, col_h, col_k, target_range)
 
+    # Creating DataFrame for the results
+    results_df = pd.DataFrame(common_differences, columns=[
+        'filename', 'result', 'maximum_comparison_range', 'actual_comparison_difference',
+        'row_index', 'p1_value', 'p2_value'
+    ])
+
+    # Convert row_index to integer
+    results_df['row_index'] = results_df['row_index'].astype('Int64')
+
+    # Saving results to CSV file
+    results_csv_path = os.path.join(str(get_root_folder_location()), 'results.csv')
+    results_df.to_csv(results_csv_path, index=False)
+    print(f"Results saved to {results_csv_path}")
+
 
 def main():
-    folder_path = str(get_csv_folder_location())
-    target_range = 20
-    col_f, col_h, col_k = 5, 7, 10
-
-    common_differences = aggregate_differences(folder_path, col_f, col_h, col_k, target_range)
-    for file, idx, diff, p1_value, p2_value in common_differences:
-        print(f"[File] → {file} | [Maximum Comparison Range] → {target_range} | [Actual Comparison Difference] → {diff}"
-              f" | [Row Index] → {idx} | [P1 Value] → {p1_value} | [P2 Value] → {p2_value}")
+    analysis_pipeline(col_f=2, col_h=7, col_k=10, target_range=5)  # Example column indices and target range
 
 
 if __name__ == "__main__":

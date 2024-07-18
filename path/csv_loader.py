@@ -12,6 +12,9 @@ def get_csv_folder_location() -> Path:
 def get_final_csv_folder_location() -> Path:
     return Path(__file__).parent.parent / "csv_folder"
 
+def get_root_folder_location() -> Path:
+    return Path(__file__).parent.parent
+
 
 def load_all_csvs() -> List[pd.DataFrame]:
     folder = get_csv_folder_location()
