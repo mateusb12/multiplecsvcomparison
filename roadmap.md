@@ -12,7 +12,7 @@
 
 ## Implement Core Functionality
 
-- [ ] **Load CSV files**
+- [x] **Load CSV files**
   - Implement a function to load all CSV files from the specified folder.
 
 - [ ] **Compute differences**
