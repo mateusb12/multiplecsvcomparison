@@ -1,7 +1,7 @@
 import glob
 import os
 import pandas as pd
-from path.csv_loader import get_csv_folder_location
+from path.csv_loader import get_csv_folder_location, get_final_csv_folder_location
 
 
 def compute_differences(input_df: pd.DataFrame, col_f: int, col_h: int, col_k: int,
@@ -73,6 +73,11 @@ def aggregate_differences(folder_path: str, col_f: int, col_h: int, col_k: int, 
             all_differences.append((os.path.basename(file), idx, diff, p1_value, p2_value))
 
     return all_differences
+
+
+def analysis_pipeline(col_f: int, col_h: int, col_k: int, target_range: int):
+    folder_path = str(get_final_csv_folder_location())
+    common_differences = aggregate_differences(folder_path, col_f, col_h, col_k, target_range)
 
 
 def main():
