@@ -1,36 +1,54 @@
-import pandas as pd
 import os
+from category_creator import create_interruption_file, create_valid_file, create_matching_difference_file, \
+    create_non_matching_difference_file, create_all_rows_matching_criteria_file, create_partial_matching_criteria_file
+
+INTERRUPTION_FILE_AMOUNT = 1
+VALID_FILE_AMOUNT = 2
+MATCHING_DIFFERENCE_FILE_AMOUNT = 2
+NON_MATCHING_DIFFERENCE_FILE_AMOUNT = 2
+ALL_ROWS_MATCHING_CRITERIA_FILE_AMOUNT = 1
+PARTIAL_MATCHING_CRITERIA_FILE_AMOUNT = 2
 
 
-def create_dummy_csv(file_path):
-    # Define the structure of the dummy CSV file
-    data = {
-        'A': range(1, 101),
-        'B': range(101, 201),
-        'C': range(201, 301),
-        'D': range(301, 401),
-        'E': range(401, 501),
-        'F': ['ALL' if i % 2 == 0 else 'OTHER' for i in range(1, 101)],
-        'G': range(501, 601),
-        'H': [i if i % 10 != 0 else -i for i in range(1, 101)],
-        'I': range(601, 701),
-        'J': range(701, 801),
-        'K': [i * 2 for i in range(1, 101)]
-    }
-
-    df = pd.DataFrame(data)
-    df.to_csv(file_path, index=False)
-
-
-def create_multiple_dummy_csvs(folder_path, num_files):
+def create_multiple_dummy_csvs(folder_path: str):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
-    for i in range(1, num_files + 1):
-        file_path = os.path.join(folder_path, f'dummy_file_{i}.csv')
-        create_dummy_csv(file_path)
+    for i in range(1, INTERRUPTION_FILE_AMOUNT + 1):
+        file_path = os.path.join(folder_path, f'interruption_file_{i}.csv')
+        create_interruption_file(file_path)
+        print(f'Created {file_path}')
+
+    for i in range(1, VALID_FILE_AMOUNT + 1):
+        file_path = os.path.join(folder_path, f'valid_file_{i}.csv')
+        create_valid_file(file_path)
+        print(f'Created {file_path}')
+
+    for i in range(1, MATCHING_DIFFERENCE_FILE_AMOUNT + 1):
+        file_path = os.path.join(folder_path, f'matching_difference_file_{i}.csv')
+        create_matching_difference_file(file_path)
+        print(f'Created {file_path}')
+
+    for i in range(1, NON_MATCHING_DIFFERENCE_FILE_AMOUNT + 1):
+        file_path = os.path.join(folder_path, f'non_matching_difference_file_{i}.csv')
+        create_non_matching_difference_file(file_path)
+        print(f'Created {file_path}')
+
+    for i in range(1, ALL_ROWS_MATCHING_CRITERIA_FILE_AMOUNT + 1):
+        file_path = os.path.join(folder_path, f'all_rows_matching_criteria_file_{i}.csv')
+        create_all_rows_matching_criteria_file(file_path)
+        print(f'Created {file_path}')
+
+    for i in range(1, PARTIAL_MATCHING_CRITERIA_FILE_AMOUNT + 1):
+        file_path = os.path.join(folder_path, f'partial_matching_criteria_file_{i}.csv')
+        create_partial_matching_criteria_file(file_path)
         print(f'Created {file_path}')
 
 
+def main():
+    folder_path = 'test_csvs'
+    create_multiple_dummy_csvs(folder_path)
+
+
 if __name__ == "__main__":
-    create_multiple_dummy_csvs('test_csvs', 10)
+    main()
