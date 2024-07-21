@@ -6,105 +6,80 @@ from path.csv_loader import get_csv_folder_location, get_final_csv_folder_locati
 from utils import print_yellow, print_red
 
 
-def compute_differences(input_df: pd.DataFrame, col_f: int, col_h: int, col_k: int,
-                        comparison_range: int) -> pd.DataFrame:
-    col_f_name = input_df.columns[col_f]
-    col_h_name = input_df.columns[col_h]
-    col_k_name = input_df.columns[col_k]
+def analysis_pipeline(col_f: int, col_h: int, col_k: int, target_range: int, encoding: str = 'utf-16-le',
+                      delimiter: str = '\t', negative_sensitive_comparison: bool = False):
+    folder_path = str(get_final_csv_folder_location())
+    common_differences = aggregate_differences(folder_path, col_f, col_h, col_k, target_range, encoding, delimiter,
+                                               negative_sensitive_comparison)
 
-    # Convert columns to numeric
-    input_df[col_h_name] = pd.to_numeric(input_df[col_h_name], errors='coerce')
-    input_df[col_k_name] = pd.to_numeric(input_df[col_k_name], errors='coerce')
+    results_df = pd.DataFrame(common_differences, columns=[
+        'filename', 'result', 'maximum_comparison_range', 'app_index', 'p1_value', 'p2_value', 'diff'
+    ])
 
-    # Filter rows where col_f is 'ALL' and both col_h and col_k are positive numbers
-    df_filtered = input_df[
-        (input_df[col_f_name] == 'ALL') & (input_df[col_h_name] > 0) & (input_df[col_k_name] > 0)
-        ].copy()
-
-    df_filtered.loc[:, 'Difference'] = df_filtered[col_h_name] - df_filtered[col_k_name]
-    df_matching = df_filtered[abs(df_filtered['Difference']) == comparison_range]
-
-    return df_matching
+    results_csv_path = os.path.join(str(get_root_folder_location()), 'results.csv')
+    results_df.to_csv(results_csv_path, index=False)
+    print(f"Results saved to {results_csv_path}")
 
 
-def check_for_interruptions(input_df: pd.DataFrame, col_h: int, col_k: int) -> bool:
-    if col_h >= len(input_df.columns) or col_k >= len(input_df.columns):
-        print(f"Invalid column index: col_h={col_h}, col_k={col_k} for DataFrame with columns {input_df.columns}")
-        return True
-
-    try:
-        col_h_data = pd.to_numeric(input_df.iloc[:, col_h], errors='coerce')
-        col_k_data = pd.to_numeric(input_df.iloc[:, col_k], errors='coerce')
-    except Exception as e:
-        print(f"Error converting columns to numeric: {e}")
-        return True
-
-    if (col_h_data < 0).any() or (col_k_data < 0).any():
-        negative_h_data_indexes = col_h_data[col_h_data < 0].index
-        negative_k_data_indexes = col_k_data[col_k_data < 0].index
-        print(f"Negative values found in columns H and K at indexes {negative_h_data_indexes} and "
-              f"{negative_k_data_indexes}")
-        return True
-    return False
+def filter_and_process_dataframe(df):
+    # Clean empty columns
+    df.dropna(axis=1, how='all', inplace=True)
+    # Rename columns
+    df.columns = [f"col_{i}" for i in range(df.shape[1])]
+    # Filter rows where 'col_0' is 'ALL'
+    df = df[df['col_0'] == 'ALL']
+    # Rename important columns
+    df = df.rename(columns={'col_2': 'p1', 'col_4': 'p2'})
+    # Filter rows that have negative values on either col_2 or col_3
+    df = df[(df['p1'] >= 0) & (df['p2'] >= 0)]
+    # Add the 'Diff' column for debugging
+    df["Diff"] = df["p1"] - df["p2"]
+    # FIlter rows where both p1 and p2 are zero
+    df = df[(df['p1'] != 0) & (df['p2'] != 0)]
+    return df
 
 
 def aggregate_differences(folder_path: str, col_f: int, col_h: int, col_k: int, comparison_range: int,
-                          encoding: str = 'utf-16-le', delimiter: str = '\t') -> list:
+                          encoding: str = 'utf-16-le', delimiter: str = '\t',
+                          negative_sensitive_comparison: bool = False) -> list:
     all_differences = []
     csv_files = glob.glob(f"{folder_path}/*.csv")
 
     for file in csv_files:
+        filename = os.path.basename(file)
         print_yellow(f"Processing file: {file}")
         try:
             df = pd.read_csv(file, encoding=encoding, delimiter=delimiter)
-
-            # Clean the DataFrame
-            df.dropna(axis=1, how='all', inplace=True)
-            df.columns = [f"col_{i}" for i in range(df.shape[1])]
-
+            df = filter_and_process_dataframe(df)
         except Exception as e:
             print(f"Error reading file {file}: {e}")
             continue
 
         try:
-            if check_for_interruptions(df, col_h, col_k):
-                print_red(f"Interruption occurred on file {file}\n")
-                all_differences.append(
-                    (os.path.basename(file), "interrupted", comparison_range, None, None, None, None))
-                continue
-
-            differences_df = compute_differences(df, col_f, col_h, col_k, comparison_range)
-
-            for idx, row in differences_df.iterrows():
-                diff = row['Difference']
-                p1_value = row[df.columns[col_h]]
-                p2_value = row[df.columns[col_k]]
-                print(
-                    f"Found matching difference in file {file} at line {idx}: Difference={diff}, p1_value={p1_value}, p2_value={p2_value}")
-                all_differences.append(
-                    (os.path.basename(file), "success", comparison_range, diff, int(idx), p1_value, p2_value))
+            # Filter only the rows where diff == comparison_range
+            if not negative_sensitive_comparison:
+                filtered_df = df[df['Diff'].abs() == comparison_range]
+            else:
+                filtered_df = df[df['Diff'] == comparison_range]
+            filtered_df = filtered_df[['p1', 'p2', 'Diff']]
+            app_index = filtered_df.shape[0]
+            if app_index == 0:
+                return all_differences
+            try:
+                most_common_p1, most_common_p2 = [float(item) for item in
+                                                  filtered_df.groupby(['p1', 'p2']).size().idxmax()]
+            except ValueError:
+                most_common_p1, most_common_p2 = 0, 0
+            result = "Success"
+            diff = most_common_p1 - most_common_p2
+            row = filename, result, comparison_range, app_index, most_common_p1, most_common_p2, diff
+            all_differences.append(row)
         except Exception as e:
             tb_str = traceback.format_exception(etype=type(e), value=e, tb=e.__traceback__)
             print(f"Error processing file {file}: {''.join(tb_str)}")
             continue
 
     return all_differences
-
-
-def analysis_pipeline(col_f: int, col_h: int, col_k: int, target_range: int, encoding: str = 'utf-16-le',
-                      delimiter: str = '\t'):
-    folder_path = str(get_final_csv_folder_location())
-    common_differences = aggregate_differences(folder_path, col_f, col_h, col_k, target_range, encoding, delimiter)
-
-    results_df = pd.DataFrame(common_differences, columns=[
-        'filename', 'result', 'maximum_comparison_range', 'actual_comparison_difference',
-        'row_index', 'p1_value', 'p2_value'
-    ])
-
-    results_df['row_index'] = results_df['row_index'].astype('Int64')
-    results_csv_path = os.path.join(str(get_root_folder_location()), 'results.csv')
-    results_df.to_csv(results_csv_path, index=False)
-    print(f"Results saved to {results_csv_path}")
 
 
 def main():

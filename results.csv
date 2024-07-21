@@ -1,6 +1,5 @@
-filename,result,maximum_comparison_range,actual_comparison_difference,row_index,p1_value,p2_value
-old10-M20-orders-nosl-notp-IN.csv,interrupted,20,,,,
-old10-M20-orders-nosl-notp-Ma1.csv,interrupted,20,,,,
-old10-M20-orders-nosl-notp-Ma2.csv,interrupted,20,,,,
-old10-M20-orders-nosl-notp-MidP.csv,interrupted,20,,,,
-old10-M20-orders-nosl-notp-PI.csv,interrupted,20,,,,
+filename,result,maximum_comparison_range,app_index,p1_value,p2_value,diff
+old10-M20-orders-nosl-notp-IN.csv,Success,67,6,140.0,73.0,67.0
+old10-M20-orders-nosl-notp-Ma1.csv,Success,67,1,305.0,238.0,67.0
+old10-M20-orders-nosl-notp-Ma2.csv,Success,67,7,230.0,163.0,67.0
+old10-M20-orders-nosl-notp-MidP.csv,Success,67,1,171.0,104.0,67.0
