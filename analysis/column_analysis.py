@@ -2,14 +2,14 @@ import glob
 import os
 import pandas as pd
 import traceback
-from path.csv_loader import get_csv_folder_location, get_final_csv_folder_location, get_root_folder_location
+from path.csv_loader import get_final_csv_folder_location, get_root_folder_location
 from utils import print_yellow, print_red
 
 
-def analysis_pipeline(col_f: int, col_h: int, col_k: int, target_range: int, encoding: str = 'utf-16-le',
+def analysis_pipeline(target_range: int, encoding: str = 'utf-16-le',
                       delimiter: str = '\t', negative_sensitive_comparison: bool = False):
     folder_path = str(get_final_csv_folder_location())
-    common_differences = aggregate_differences(folder_path, col_f, col_h, col_k, target_range, encoding, delimiter,
+    common_differences = aggregate_differences(folder_path, target_range, encoding, delimiter,
                                                negative_sensitive_comparison)
 
     results_df = pd.DataFrame(common_differences, columns=[
@@ -39,7 +39,7 @@ def filter_and_process_dataframe(df):
     return df
 
 
-def aggregate_differences(folder_path: str, col_f: int, col_h: int, col_k: int, comparison_range: int,
+def aggregate_differences(folder_path: str, comparison_range: int,
                           encoding: str = 'utf-16-le', delimiter: str = '\t',
                           negative_sensitive_comparison: bool = False) -> list:
     all_differences = []
