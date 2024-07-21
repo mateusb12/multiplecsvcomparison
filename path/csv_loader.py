@@ -42,9 +42,7 @@ def load_merged_csv() -> pd.DataFrame:
 
     for file in files:
         df = pd.read_csv(file, encoding='utf-16-le', delimiter='\t')
-        print(f"Columns in {file.name} before dropping NaNs: {df.columns.tolist()}")
         df.dropna(axis=1, how='all', inplace=True)
-        print(f"Columns in {file.name} after dropping NaNs: {df.columns.tolist()}")
 
         # Standardize column names
         df.columns = df.columns.str.strip()
