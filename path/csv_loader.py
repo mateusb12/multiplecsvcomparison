@@ -1,3 +1,4 @@
+import os
 import random
 from pathlib import Path
 from typing import List
@@ -12,15 +13,54 @@ def get_csv_folder_location() -> Path:
 def get_final_csv_folder_location() -> Path:
     return Path(__file__).parent.parent / "csv_folder"
 
+
 def get_root_folder_location() -> Path:
     return Path(__file__).parent.parent
 
 
-def load_all_csvs() -> List[pd.DataFrame]:
-    folder = get_csv_folder_location()
+def load_all_csvs() -> dict:
+    folder = get_final_csv_folder_location()
     files = list(folder.glob("*.csv"))
-    dfs = [pd.read_csv(file) for file in files]
+    dfs = {}
+    for file in files:
+        df = pd.read_csv(file, encoding='utf-16-le', delimiter='\t')
+        df.dropna(axis=1, how='all', inplace=True)
+        df.columns = df.columns.str.strip()
+        relevant_columns = ['ALL', '2024.7.15', '0.00', '00:00', '0.00.1', '00:00.1']
+        df = df[relevant_columns]
+        df.columns = ["Type", "Date", "P1", "Time1", "P2", "Time2"]
+        filename = os.path.basename(file)
+        dfs[filename] = df
+    print(f"Loaded {len(dfs)} files")
     return dfs
+
+
+def load_merged_csv() -> pd.DataFrame:
+    folder = get_final_csv_folder_location()
+    files = list(folder.glob("*.csv"))
+    merged = pd.DataFrame()
+
+    for file in files:
+        df = pd.read_csv(file, encoding='utf-16-le', delimiter='\t')
+        print(f"Columns in {file.name} before dropping NaNs: {df.columns.tolist()}")
+        df.dropna(axis=1, how='all', inplace=True)
+        print(f"Columns in {file.name} after dropping NaNs: {df.columns.tolist()}")
+
+        # Standardize column names
+        df.columns = df.columns.str.strip()
+
+        # Select only the relevant columns, assuming these are the relevant columns
+        relevant_columns = ['ALL', '2024.7.15', '0.00', '00:00', '0.00.1', '00:00.1']
+        df = df[relevant_columns]
+        filename = os.path.basename(file)
+        df["Filename"] = filename
+
+        merged = pd.concat([merged, df], ignore_index=True)
+
+    merged.dropna(axis=1, how='all', inplace=True)
+    new_columns = ["Type", "Date", "P1", "Time1", "P2", "Time2", "Filename"]
+    merged.columns = new_columns
+    return merged
 
 
 def load_random_csv() -> pd.DataFrame:
@@ -32,7 +72,7 @@ def load_random_csv() -> pd.DataFrame:
 
 
 def main():
-    all_csvs = load_all_csvs()
+    merged = load_merged_csv()
     return
 
 

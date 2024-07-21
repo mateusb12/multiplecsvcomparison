@@ -3,7 +3,7 @@ import glob
 import pandas as pd
 from collections import Counter
 
-from analysis.column_analysis import filter_and_process_dataframe
+from utils import filter_and_process_dataframe
 from path.csv_loader import get_final_csv_folder_location
 
 
