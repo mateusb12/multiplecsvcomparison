@@ -1,0 +1,23 @@
+P1,P2,Diff,Probability,Amount of files with this pair,Files
+-64,-131,67,16.67%,1,old10-M20-orders-nosl-notp-out.csv
+-38,-105,67,16.67%,1,old10-M20-orders-nosl-notp-out.csv
+-30,-97,67,16.67%,1,old10-M20-orders-nosl-notp-IN.csv
+51,-16,67,16.67%,1,old10-M20-orders-nosl-notp-out.csv
+125,58,67,16.67%,1,old10-M20-orders-nosl-notp-out.csv
+140,73,67,16.67%,1,old10-M20-orders-nosl-notp-IN.csv
+142,75,67,16.67%,1,old10-M20-orders-nosl-notp-IN.csv
+161,94,67,16.67%,1,old10-M20-orders-nosl-notp-IN.csv
+167,100,67,16.67%,1,old10-M20-orders-nosl-notp-IN.csv
+171,104,67,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv
+174,107,67,16.67%,1,old10-M20-orders-nosl-notp-IN.csv
+198,131,67,16.67%,1,old10-M20-orders-nosl-notp-out.csv
+212,145,67,16.67%,1,old10-M20-orders-nosl-notp-IN.csv
+230,163,67,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv
+247,180,67,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv
+250,183,67,16.67%,1,old10-M20-orders-nosl-notp-PI.csv
+293,226,67,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv
+305,238,67,16.67%,1,old10-M20-orders-nosl-notp-Ma1.csv
+331,264,67,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv
+345,278,67,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv
+395,328,67,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv
+418,351,67,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv

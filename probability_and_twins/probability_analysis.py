@@ -2,9 +2,10 @@ from path.csv_loader import load_all_csvs, load_merged_csv, get_root_folder_loca
 import pandas as pd
 
 
-def sanitize_df(df):
+def sanitize_df(df, negative_sensitive: bool = False):
     df = df[df['Type'] == 'ALL']
-    df = df[(df['P1'] > 0) & (df['P2'] > 0)]
+    if negative_sensitive:
+        df = df[(df['P1'] > 0) & (df['P2'] > 0)]
     df["Diff"] = df["P1"] - df["P2"]
     return df
 
@@ -19,9 +20,9 @@ def extract_unique_pairs(df):
     return sorted(unique_pairs_list)
 
 
-def generate_pair_occurrence_matrix(merged_df: pd.DataFrame):
+def generate_pair_occurrence_matrix(merged_df: pd.DataFrame, negative_sensitive: bool = False):
     """Generate a pair of occurrence matrix indicating which pairs appear in which files."""
-    df = sanitize_df(merged_df)
+    df = sanitize_df(merged_df, negative_sensitive)
     unique_files = df['Filename'].unique()
     unique_pairs = extract_unique_pairs(df)
     pair_dict = {pair: {filename: 0 for filename in unique_files} for pair in unique_pairs}
@@ -58,9 +59,14 @@ def find_identical_pairs(matrix_df: pd.DataFrame):
 
         if other_files_count > 0:
             probability = other_files_count / total_files * 100
+            p1, p2 = pair
+            diff = p1 - p2
             results.append({
-                "Pair": pair,
+                "P1": int(p1),
+                "P2": int(p2),
+                'Diff': int(diff),
                 "Probability": f"{probability:.2f}%",
+                "Amount of files with this pair": other_files_count,
                 "Files": ','.join(other_files)
             })
     results.sort(key=lambda x: x['Probability'], reverse=True)
@@ -68,6 +74,8 @@ def find_identical_pairs(matrix_df: pd.DataFrame):
 
 
 def save_results_to_csv(df):
+    most_common_diff_value = df['Diff'].mode()[0]
+    print(f"Most common diff value: {most_common_diff_value}")
     csv_name = "probability_results.csv"
     path = get_root_folder_location() / csv_name
     df.to_csv(path, index=False)
