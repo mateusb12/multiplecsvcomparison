@@ -48,16 +48,25 @@ def load_merged_csv() -> pd.DataFrame:
         df.columns = df.columns.str.strip()
 
         # Select only the relevant columns, assuming these are the relevant columns
+
         relevant_columns = ['ALL', '2024.7.15', '0.00', '00:00', '0.00.1', '00:00.1']
-        df = df[relevant_columns]
+        try:
+            df = df[relevant_columns]
+        except KeyError:
+            relevant_columns = ['23', '2024.7.15', '0.00', '00:00', '0.00.1', '00:00.1']
+            df = df[relevant_columns]
         filename = os.path.basename(file)
         df["Filename"] = filename
 
         merged = pd.concat([merged, df], ignore_index=True)
 
     merged.dropna(axis=1, how='all', inplace=True)
-    new_columns = ["Type", "Date", "P1", "Time1", "P2", "Time2", "Filename"]
-    merged.columns = new_columns
+    new_columns = ['Type', 'Date', 'P1', 'Time1', 'P2', 'Time2', 'Filename']
+    try:
+        merged.columns = new_columns
+    except ValueError:
+        new_columns.append("23")
+        merged.columns = new_columns
     return merged
 
 
