@@ -1,13 +1,35 @@
 P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,P1_long_date,P2_time,P2_date,P2_long_date
 228,114,114,50.00%,3,"old10-M20-orders-nosl-notp-Ma2.csv,old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,00:05,2024.7.19,19 July 2024,00:11,2024.7.19,19 July 2024
 380,289,91,50.00%,3,"old10-M20-orders-nosl-notp-Ma2.csv,old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,06:05,2024.7.19,19 July 2024,06:05,2024.7.19,19 July 2024
+12,4,8,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,03:09,2024.7.17,17 July 2024,03:06,2024.7.17,17 July 2024
+13,6,7,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,09:55,2024.7.16,16 July 2024,09:40,2024.7.16,16 July 2024
+17,7,10,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,16:40,2024.7.18,18 July 2024,16:50,2024.7.18,18 July 2024
+20,4,16,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,18:40,2024.7.16,16 July 2024,18:23,2024.7.16,16 July 2024
+24,14,10,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,10:21,2024.7.18,18 July 2024,10:37,2024.7.18,18 July 2024
+26,12,14,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,19:08,2024.7.16,16 July 2024,19:17,2024.7.16,16 July 2024
+26,17,9,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,00:38,2024.7.17,17 July 2024,00:26,2024.7.17,17 July 2024
+27,12,15,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,12:00,2024.7.16,16 July 2024,11:49,2024.7.16,16 July 2024
+27,15,12,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,13:10,2024.7.18,18 July 2024,13:05,2024.7.18,18 July 2024
+27,20,7,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,15:46,2024.7.18,18 July 2024,15:46,2024.7.18,18 July 2024
+28,12,16,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,19:40,2024.7.16,16 July 2024,19:26,2024.7.16,16 July 2024
+29,14,15,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,18:50,2024.7.16,16 July 2024,18:40,2024.7.16,16 July 2024
+29,16,13,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,07:05,2024.7.18,18 July 2024,07:13,2024.7.18,18 July 2024
+30,12,18,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,09:36,2024.7.16,16 July 2024,09:22,2024.7.16,16 July 2024
+31,17,14,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,14:44,2024.7.18,18 July 2024,14:56,2024.7.18,18 July 2024
+31,19,12,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,12:35,2024.7.18,18 July 2024,12:35,2024.7.18,18 July 2024
+33,4,29,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,22:30,2024.7.16,16 July 2024,22:24,2024.7.16,16 July 2024
+37,26,11,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,17:33,2024.7.18,18 July 2024,17:20,2024.7.18,18 July 2024
+41,24,17,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,06:40,2024.7.18,18 July 2024,06:22,2024.7.18,18 July 2024
 44,4,40,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,21:22,2024.7.16,16 July 2024,21:35,2024.7.16,16 July 2024
+47,25,22,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,09:56,2024.7.16,16 July 2024,09:47,2024.7.16,16 July 2024
+50,34,16,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,10:09,2024.7.16,16 July 2024,10:01,2024.7.16,16 July 2024
 54,5,49,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,10:48,2024.7.17,17 July 2024,10:56,2024.7.17,17 July 2024
 66,18,48,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,10:21,2024.7.17,17 July 2024,10:25,2024.7.17,17 July 2024
 73,10,63,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,10:07,2024.7.17,17 July 2024,10:17,2024.7.17,17 July 2024
 83,13,70,33.33%,2,"old10-M20-orders-nosl-notp-Ma2.csv,old10-M20-orders-nosl-notp-MidP.csv",REVERSE,13:35,2024.7.17,17 July 2024,13:25,2024.7.17,17 July 2024
 85,14,71,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,12:38,2024.7.17,17 July 2024,12:38,2024.7.17,17 July 2024
 87,3,84,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,09:41,2024.7.17,17 July 2024,09:49,2024.7.17,17 July 2024
+92,61,31,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,23:20,2024.7.16,16 July 2024,23:40,2024.7.16,16 July 2024
 109,63,46,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,00:38,2024.7.17,17 July 2024,00:26,2024.7.17,17 July 2024
 109,74,35,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,00:49,2024.7.17,17 July 2024,00:53,2024.7.17,17 July 2024
 112,61,51,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,23:47,2024.7.16,16 July 2024,23:40,2024.7.16,16 July 2024
@@ -48,6 +70,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 184,86,98,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,10:06,2024.7.19,19 July 2024,10:06,2024.7.19,19 July 2024
 188,105,83,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,17:34,2024.7.19,19 July 2024,17:37,2024.7.19,19 July 2024
 189,138,51,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,06:26,2024.7.17,17 July 2024,06:36,2024.7.17,17 July 2024
+190,158,32,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,02:48,2024.7.17,17 July 2024,02:45,2024.7.17,17 July 2024
 192,95,97,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,18:23,2024.7.19,19 July 2024,18:38,2024.7.19,19 July 2024
 192,98,94,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,07:20,2024.7.17,17 July 2024,07:37,2024.7.17,17 July 2024
 193,104,89,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,23:35,2024.7.18,18 July 2024,23:34,2024.7.18,18 July 2024
@@ -78,14 +101,17 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 221,136,85,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,23:47,2024.7.18,18 July 2024,23:58,2024.7.18,18 July 2024
 229,188,41,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,03:40,2024.7.17,17 July 2024,03:21,2024.7.17,17 July 2024
 233,160,73,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,11:05,2024.7.18,18 July 2024,11:16,2024.7.18,18 July 2024
+234,206,28,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,04:35,2024.7.17,17 July 2024,04:26,2024.7.17,17 July 2024
 236,115,121,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,08:21,2024.7.19,19 July 2024,08:28,2024.7.19,19 July 2024
 236,156,80,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,16:39,2024.7.18,18 July 2024,16:24,2024.7.18,18 July 2024
 238,198,40,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,04:00,2024.7.17,17 July 2024,03:48,2024.7.17,17 July 2024
+238,211,27,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,04:00,2024.7.17,17 July 2024,04:10,2024.7.17,17 July 2024
 239,120,119,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,08:40,2024.7.19,19 July 2024,09:00,2024.7.19,19 July 2024
 241,156,85,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,10:49,2024.7.19,19 July 2024,10:59,2024.7.19,19 July 2024
 242,116,126,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,08:12,2024.7.19,19 July 2024,08:09,2024.7.19,19 July 2024
 242,164,78,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,16:58,2024.7.18,18 July 2024,16:50,2024.7.18,18 July 2024
 242,207,35,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,05:44,2024.7.17,17 July 2024,06:00,2024.7.17,17 July 2024
+244,222,22,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,05:27,2024.7.17,17 July 2024,05:24,2024.7.17,17 July 2024
 245,208,37,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,04:47,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
 246,94,152,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",REVERSE,10:39,2024.7.19,19 July 2024,10:21,2024.7.19,19 July 2024
 250,183,67,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,10:21,2024.7.18,18 July 2024,10:40,2024.7.18,18 July 2024
@@ -158,6 +184,17 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 368,213,155,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,06:05,2024.7.19,19 July 2024,06:05,2024.7.19,19 July 2024
 371,214,157,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,07:10,2024.7.19,19 July 2024,07:16,2024.7.19,19 July 2024
 376,183,193,33.33%,2,"old10-M20-orders-nosl-notp-PI - 2.csv,old10-M20-orders-nosl-notp-PI.csv",FORWARD,14:44,2024.7.18,18 July 2024,14:56,2024.7.18,18 July 2024
+14,7,7,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,18:00,2024.7.17,17 July 2024,18:20,2024.7.17,17 July 2024
+15,4,11,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,22:28,2024.7.16,16 July 2024,22:24,2024.7.16,16 July 2024
+15,6,9,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,21:58,2024.7.16,16 July 2024,22:00,2024.7.16,16 July 2024
+15,7,8,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,08:22,2024.7.17,17 July 2024,08:35,2024.7.17,17 July 2024
+16,1,15,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,22:13,2024.7.16,16 July 2024,22:02,2024.7.16,16 July 2024
+17,5,12,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,21:00,2024.7.16,16 July 2024,21:10,2024.7.16,16 July 2024
+19,7,12,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,14:40,2024.7.18,18 July 2024,14:56,2024.7.18,18 July 2024
+21,12,9,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,23:21,2024.7.16,16 July 2024,23:32,2024.7.16,16 July 2024
+22,12,10,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,18:50,2024.7.16,16 July 2024,18:40,2024.7.16,16 July 2024
+22,14,8,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,02:18,2024.7.18,18 July 2024,02:00,2024.7.18,18 July 2024
+23,15,8,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,21:25,2024.7.17,17 July 2024,21:37,2024.7.17,17 July 2024
 36,1,35,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,00:31,2024.7.18,18 July 2024,00:40,2024.7.18,18 July 2024
 48,13,35,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,16:40,2024.7.17,17 July 2024,16:52,2024.7.17,17 July 2024
 50,2,48,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,23:32,2024.7.16,16 July 2024,23:38,2024.7.16,16 July 2024
@@ -176,6 +213,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 77,17,60,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,20:06,2024.7.18,18 July 2024,20:05,2024.7.18,18 July 2024
 78,7,71,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,00:41,2024.7.19,19 July 2024,00:41,2024.7.19,19 July 2024
 80,16,64,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,13:40,2024.7.17,17 July 2024,13:55,2024.7.17,17 July 2024
+80,49,31,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,02:48,2024.7.17,17 July 2024,02:46,2024.7.17,17 July 2024
 82,24,58,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,02:06,2024.7.17,17 July 2024,02:00,2024.7.17,17 July 2024
 83,21,62,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,11:05,2024.7.18,18 July 2024,11:16,2024.7.18,18 July 2024
 84,11,73,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,12:18,2024.7.17,17 July 2024,12:05,2024.7.17,17 July 2024
@@ -241,6 +279,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 123,29,94,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,09:41,2024.7.17,17 July 2024,09:49,2024.7.17,17 July 2024
 124,15,109,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,09:03,2024.7.17,17 July 2024,09:19,2024.7.17,17 July 2024
 124,63,61,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,16:05,2024.7.18,18 July 2024,16:20,2024.7.18,18 July 2024
+124,98,26,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,00:06,2024.7.17,17 July 2024,00:20,2024.7.17,17 July 2024
 125,38,87,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,23:47,2024.7.16,16 July 2024,23:41,2024.7.16,16 July 2024
 125,44,81,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,23:52,2024.7.18,18 July 2024,23:58,2024.7.18,18 July 2024
 125,49,76,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,07:45,2024.7.18,18 July 2024,08:00,2024.7.18,18 July 2024
@@ -256,6 +295,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 130,33,97,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,16:43,2024.7.19,19 July 2024,16:57,2024.7.19,19 July 2024
 131,31,100,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,01:40,2024.7.19,19 July 2024,01:54,2024.7.19,19 July 2024
 131,77,54,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,09:37,2024.7.18,18 July 2024,09:39,2024.7.18,18 July 2024
+131,99,32,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,04:35,2024.7.17,17 July 2024,04:26,2024.7.17,17 July 2024
 132,66,66,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,12:18,2024.7.17,17 July 2024,12:05,2024.7.17,17 July 2024
 133,69,64,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,02:06,2024.7.17,17 July 2024,02:02,2024.7.17,17 July 2024
 133,91,42,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,10:50,2024.7.17,17 July 2024,10:41,2024.7.17,17 July 2024
@@ -265,6 +305,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 135,83,52,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,00:05,2024.7.17,17 July 2024,00:20,2024.7.17,17 July 2024
 135,88,47,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,10:07,2024.7.17,17 July 2024,10:17,2024.7.17,17 July 2024
 135,91,44,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,04:00,2024.7.17,17 July 2024,03:48,2024.7.17,17 July 2024
+135,103,32,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,04:00,2024.7.17,17 July 2024,04:10,2024.7.17,17 July 2024
 136,44,92,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,09:26,2024.7.17,17 July 2024,09:38,2024.7.17,17 July 2024
 137,78,59,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,07:00,2024.7.17,17 July 2024,07:16,2024.7.17,17 July 2024
 137,101,36,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,04:48,2024.7.18,18 July 2024,04:42,2024.7.18,18 July 2024
@@ -288,17 +329,20 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 143,78,65,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,03:09,2024.7.17,17 July 2024,03:06,2024.7.17,17 July 2024
 143,97,46,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,00:39,2024.7.17,17 July 2024,00:23,2024.7.17,17 July 2024
 144,5,139,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,01:28,2024.7.19,19 July 2024,01:20,2024.7.19,19 July 2024
+144,113,31,16.67%,1,old10-M20-orders-nosl-notp-PI - 2.csv,REVERSE,02:18,2024.7.18,18 July 2024,02:00,2024.7.18,18 July 2024
 145,17,128,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,14:08,2024.7.18,18 July 2024,14:00,2024.7.18,18 July 2024
 145,38,107,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,02:24,2024.7.19,19 July 2024,02:30,2024.7.19,19 July 2024
 145,52,93,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,03:06,2024.7.18,18 July 2024,03:20,2024.7.18,18 July 2024
 145,81,64,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,09:41,2024.7.17,17 July 2024,09:49,2024.7.17,17 July 2024
 145,106,39,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,04:47,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
+146,123,23,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,05:21,2024.7.17,17 July 2024,05:40,2024.7.17,17 July 2024
 146,235,-89,16.67%,1,old10-M20-orders-nosl-notp-PI.csv,REVERSE,02:18,2024.7.18,18 July 2024,02:00,2024.7.18,18 July 2024
 147,12,135,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,12:59,2024.7.19,19 July 2024,12:50,2024.7.19,19 July 2024
 147,53,94,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,09:12,2024.7.18,18 July 2024,09:01,2024.7.18,18 July 2024
 148,9,139,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,15:22,2024.7.19,19 July 2024,15:38,2024.7.19,19 July 2024
 148,111,37,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,03:40,2024.7.17,17 July 2024,03:21,2024.7.17,17 July 2024
 149,3,146,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,01:06,2024.7.19,19 July 2024,01:10,2024.7.19,19 July 2024
+150,125,25,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,00:49,2024.7.17,17 July 2024,00:42,2024.7.17,17 July 2024
 151,56,95,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,06:05,2024.7.17,17 July 2024,06:19,2024.7.17,17 July 2024
 151,77,74,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,06:48,2024.7.17,17 July 2024,06:40,2024.7.17,17 July 2024
 151,85,66,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,03:24,2024.7.19,19 July 2024,03:36,2024.7.19,19 July 2024
@@ -309,6 +353,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 153,106,47,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,05:18,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
 154,27,127,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,06:30,2024.7.19,19 July 2024,06:21,2024.7.19,19 July 2024
 154,47,107,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,15:53,2024.7.19,19 July 2024,15:40,2024.7.19,19 July 2024
+154,122,32,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,04:00,2024.7.17,17 July 2024,04:03,2024.7.17,17 July 2024
 155,74,81,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,23:05,2024.7.16,16 July 2024,23:20,2024.7.16,16 July 2024
 155,92,63,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,03:25,2024.7.19,19 July 2024,03:36,2024.7.19,19 July 2024
 155,102,53,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,17:33,2024.7.18,18 July 2024,17:20,2024.7.18,18 July 2024
@@ -348,6 +393,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 168,74,94,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,01:40,2024.7.19,19 July 2024,01:54,2024.7.19,19 July 2024
 168,89,79,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,03:45,2024.7.19,19 July 2024,03:52,2024.7.19,19 July 2024
 169,112,57,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,08:44,2024.7.17,17 July 2024,08:48,2024.7.17,17 July 2024
+169,141,28,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,05:35,2024.7.17,17 July 2024,05:24,2024.7.17,17 July 2024
 170,1,169,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,07:30,2024.7.19,19 July 2024,07:39,2024.7.19,19 July 2024
 170,14,156,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,13:52,2024.7.19,19 July 2024,13:50,2024.7.19,19 July 2024
 171,34,137,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,01:06,2024.7.19,19 July 2024,01:10,2024.7.19,19 July 2024
@@ -356,6 +402,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 171,123,48,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,04:47,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
 172,67,105,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,06:05,2024.7.17,17 July 2024,06:14,2024.7.17,17 July 2024
 173,121,52,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,09:09,2024.7.17,17 July 2024,09:03,2024.7.17,17 July 2024
+173,154,19,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,02:00,2024.7.17,17 July 2024,01:55,2024.7.17,17 July 2024
 174,107,67,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,05:18,2024.7.18,18 July 2024,05:09,2024.7.18,18 July 2024
 174,120,54,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,06:40,2024.7.17,17 July 2024,06:22,2024.7.17,17 July 2024
 175,69,106,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,02:12,2024.7.19,19 July 2024,02:07,2024.7.19,19 July 2024
@@ -370,9 +417,11 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 177,88,89,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,07:27,2024.7.17,17 July 2024,07:37,2024.7.17,17 July 2024
 177,104,73,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,18:20,2024.7.18,18 July 2024,18:29,2024.7.18,18 July 2024
 177,123,54,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,05:18,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
+178,147,31,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,06:26,2024.7.17,17 July 2024,06:22,2024.7.17,17 July 2024
 179,77,102,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,18:41,2024.7.18,18 July 2024,18:57,2024.7.18,18 July 2024
 179,84,95,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,03:45,2024.7.19,19 July 2024,03:52,2024.7.19,19 July 2024
 179,144,35,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,08:18,2024.7.17,17 July 2024,08:03,2024.7.17,17 July 2024
+179,153,26,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,02:40,2024.7.17,17 July 2024,02:31,2024.7.17,17 July 2024
 180,38,142,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,07:30,2024.7.19,19 July 2024,07:39,2024.7.19,19 July 2024
 180,62,118,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,13:35,2024.7.18,18 July 2024,13:21,2024.7.18,18 July 2024
 180,102,78,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,23:52,2024.7.18,18 July 2024,23:53,2024.7.18,18 July 2024
@@ -389,7 +438,10 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 185,94,91,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,23:34,2024.7.18,18 July 2024,23:29,2024.7.18,18 July 2024
 185,137,48,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,07:20,2024.7.17,17 July 2024,07:37,2024.7.17,17 July 2024
 185,143,42,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,02:40,2024.7.17,17 July 2024,02:31,2024.7.17,17 July 2024
+185,156,29,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,04:08,2024.7.17,17 July 2024,04:03,2024.7.17,17 July 2024
+185,158,27,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,07:20,2024.7.17,17 July 2024,07:11,2024.7.17,17 July 2024
 186,144,42,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,07:43,2024.7.17,17 July 2024,07:57,2024.7.17,17 July 2024
+186,168,18,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,02:48,2024.7.17,17 July 2024,02:45,2024.7.17,17 July 2024
 187,98,89,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,REVERSE,04:20,2024.7.19,19 July 2024,04:00,2024.7.19,19 July 2024
 187,104,83,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,04:41,2024.7.19,19 July 2024,05:00,2024.7.19,19 July 2024
 187,110,77,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,04:20,2024.7.19,19 July 2024,04:33,2024.7.19,19 July 2024
@@ -397,26 +449,40 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 187,154,33,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,02:00,2024.7.17,17 July 2024,01:42,2024.7.17,17 July 2024
 188,42,146,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,14:59,2024.7.19,19 July 2024,14:46,2024.7.19,19 July 2024
 188,117,71,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,15:20,2024.7.18,18 July 2024,15:34,2024.7.18,18 July 2024
+188,160,28,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,02:06,2024.7.17,17 July 2024,02:02,2024.7.17,17 July 2024
 189,100,89,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,01:38,2024.7.17,17 July 2024,01:20,2024.7.17,17 July 2024
 189,111,78,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,05:42,2024.7.19,19 July 2024,06:00,2024.7.19,19 July 2024
 189,119,70,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,11:03,2024.7.18,18 July 2024,11:17,2024.7.18,18 July 2024
 189,132,57,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,07:00,2024.7.17,17 July 2024,07:20,2024.7.17,17 July 2024
 190,82,108,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,13:47,2024.7.18,18 July 2024,13:47,2024.7.18,18 July 2024
 190,111,79,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,20:47,2024.7.18,18 July 2024,20:56,2024.7.18,18 July 2024
+191,162,29,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,03:09,2024.7.17,17 July 2024,03:06,2024.7.17,17 July 2024
 192,119,73,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,18:41,2024.7.19,19 July 2024,18:50,2024.7.19,19 July 2024
 192,122,70,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,19:50,2024.7.19,19 July 2024,20:00,2024.7.19,19 July 2024
 193,152,41,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,03:57,2024.7.17,17 July 2024,03:51,2024.7.17,17 July 2024
 193,159,34,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,06:48,2024.7.17,17 July 2024,06:52,2024.7.17,17 July 2024
+193,166,27,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,03:40,2024.7.17,17 July 2024,03:32,2024.7.17,17 July 2024
+193,175,18,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,03:40,2024.7.17,17 July 2024,03:21,2024.7.17,17 July 2024
 194,144,50,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,10:21,2024.7.18,18 July 2024,10:37,2024.7.18,18 July 2024
+194,166,28,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,02:48,2024.7.17,17 July 2024,02:45,2024.7.17,17 July 2024
+194,179,15,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,04:00,2024.7.17,17 July 2024,04:03,2024.7.17,17 July 2024
 195,94,101,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,05:24,2024.7.19,19 July 2024,05:21,2024.7.19,19 July 2024
+195,202,-7,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,04:42,2024.7.19,19 July 2024,04:58,2024.7.19,19 July 2024
 196,122,74,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,12:00,2024.7.18,18 July 2024,11:46,2024.7.18,18 July 2024
+196,173,23,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,03:57,2024.7.17,17 July 2024,03:51,2024.7.17,17 July 2024
+197,174,23,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,05:58,2024.7.17,17 July 2024,06:00,2024.7.17,17 July 2024
+197,180,17,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,04:36,2024.7.17,17 July 2024,04:24,2024.7.17,17 July 2024
 198,95,103,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,02:24,2024.7.19,19 July 2024,02:30,2024.7.19,19 July 2024
 198,131,67,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,03:45,2024.7.19,19 July 2024,03:52,2024.7.19,19 July 2024
 198,136,62,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,03:25,2024.7.19,19 July 2024,03:36,2024.7.19,19 July 2024
+198,183,15,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,05:27,2024.7.17,17 July 2024,05:24,2024.7.17,17 July 2024
 199,155,44,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,05:58,2024.7.17,17 July 2024,06:00,2024.7.17,17 July 2024
+199,177,22,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,04:47,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
 200,148,52,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,03:06,2024.7.17,17 July 2024,03:06,2024.7.17,17 July 2024
+200,173,27,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,05:35,2024.7.17,17 July 2024,05:24,2024.7.17,17 July 2024
 201,52,149,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,14:03,2024.7.19,19 July 2024,14:11,2024.7.19,19 July 2024
 202,113,89,16.67%,1,old10-M20-orders-nosl-notp-PI.csv,REVERSE,01:51,2024.7.18,18 July 2024,01:41,2024.7.18,18 July 2024
+202,177,25,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,05:06,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
 205,107,98,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,13:00,2024.7.18,18 July 2024,12:43,2024.7.18,18 July 2024
 205,164,41,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,05:06,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
 206,106,100,16.67%,1,old10-M20-orders-nosl-notp-out.csv,FORWARD,07:00,2024.7.19,19 July 2024,07:00,2024.7.19,19 July 2024
@@ -464,6 +530,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 233,175,58,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,00:42,2024.7.19,19 July 2024,00:49,2024.7.19,19 July 2024
 235,108,127,16.67%,1,old10-M20-orders-nosl-notp-MidP.csv,FORWARD,05:18,2024.7.19,19 July 2024,05:20,2024.7.19,19 July 2024
 235,164,71,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,FORWARD,04:47,2024.7.17,17 July 2024,05:00,2024.7.17,17 July 2024
+235,203,32,16.67%,1,old10-M20-orders-nosl-notp-PI - 2.csv,FORWARD,15:31,2024.7.18,18 July 2024,15:34,2024.7.18,18 July 2024
 238,125,113,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,13:14,2024.7.18,18 July 2024,13:05,2024.7.18,18 July 2024
 238,145,93,16.67%,1,old10-M20-orders-nosl-notp-out.csv,REVERSE,05:18,2024.7.19,19 July 2024,05:07,2024.7.19,19 July 2024
 238,169,69,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,18:41,2024.7.18,18 July 2024,18:57,2024.7.18,18 July 2024
@@ -522,6 +589,7 @@ P1,P2,Diff,Probability,Amount of files with this pair,Files,DIR,P1_time,P1_date,
 298,233,65,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,11:40,2024.7.18,18 July 2024,11:27,2024.7.18,18 July 2024
 299,183,116,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,14:08,2024.7.18,18 July 2024,14:00,2024.7.18,18 July 2024
 300,192,108,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,10:39,2024.7.19,19 July 2024,10:21,2024.7.19,19 July 2024
+301,274,27,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,04:48,2024.7.18,18 July 2024,04:48,2024.7.18,18 July 2024
 302,245,57,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,REVERSE,16:17,2024.7.19,19 July 2024,16:12,2024.7.19,19 July 2024
 303,210,93,16.67%,1,old10-M20-orders-nosl-notp-Ma2.csv,FORWARD,08:21,2024.7.19,19 July 2024,08:28,2024.7.19,19 July 2024
 303,220,83,16.67%,1,old10-M20-orders-nosl-notp-IN.csv,REVERSE,15:13,2024.7.18,18 July 2024,15:10,2024.7.18,18 July 2024

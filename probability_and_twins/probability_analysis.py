@@ -1,3 +1,5 @@
+import itertools
+
 import pandas as pd
 from path.csv_loader import load_all_csvs, load_merged_csv, get_root_folder_location
 from datetime import datetime
@@ -6,7 +8,7 @@ from datetime import datetime
 def sanitize_df(df, comparison_range: int = 33):
     df = df[df['Type'] == 'ALL']
     # Filtering out interruptions
-    df = df[(df['P1'] > 0) & (df['P2'] > 0)]
+    df = df[(df['P1'] >= 0) & (df['P2'] >= 0)]
     df = df.copy()
     df.loc[:, "Diff"] = df["P1"] - df["P2"]
     # Filtering out only the pairs where the difference is >= comparison_range
@@ -16,26 +18,29 @@ def sanitize_df(df, comparison_range: int = 33):
 
 def extract_unique_pairs(df):
     """Extract unique pairs from the sanitized dataframe."""
-    unique_pairs = set()
-    for index, row in df.iterrows():
-        pair = (row['P1'], row['P2'])
-        unique_pairs.add(pair)
-    unique_pairs_list = list(unique_pairs)
-    return sorted(unique_pairs_list)
+    unique_p1 = [float(item) for item in list(df['P1'].unique())]
+    unique_p2 = [float(item) for item in list(df['P2'].unique())]
+    unique_pairs = list(itertools.product(unique_p1, unique_p2))
+    return sorted(unique_pairs)
 
 
 def generate_pair_occurrence_matrix(merged_df: pd.DataFrame, comparison_range: int = 33):
     """Generate a pair of occurrence matrix indicating which pairs appear in which files."""
     df = sanitize_df(merged_df, comparison_range)
-    unique_files = df['Filename'].unique()
+    unique_files = list(df['Filename'].unique())
     unique_pairs = extract_unique_pairs(df)
     pair_dict = {pair: {filename: 0 for filename in unique_files} for pair in unique_pairs}
 
-    for index, row in df.iterrows():
-        pair = (row['P1'], row['P2'])
-        if pair in pair_dict:
-            pair_dict[pair][row['Filename']] = 1
+    for filename in unique_files:
+        file_df = df[df['Filename'] == filename]
+        p1_values = sorted(list(file_df['P1'].tolist()))
+        p2_values = sorted(list(file_df['P2'].tolist()))
+        for pair in unique_pairs:
+            if pair[0] in p1_values and pair[1] in p2_values:
+                pair_dict[pair][filename] += 1
 
+    debug_pair = (235.0, 202.0)
+    debug_pair_occurrence = pair_dict[debug_pair]
     # Convert the pair dictionary to a DataFrame
     matrix_df = pd.DataFrame.from_dict(pair_dict, orient='index')
     matrix_df['Pair'] = matrix_df.index  # Explicitly create 'Pair' column
@@ -112,7 +117,7 @@ def save_results_to_csv(df):
 
 
 def main():
-    comparison_range = 33  # Updated to 33
+    comparison_range = 33
     merged_csv = load_merged_csv()
     matrix_df = generate_pair_occurrence_matrix(merged_csv, comparison_range)
     pairs = find_identical_pairs(matrix_df, merged_csv)  # Pass merged_csv to find_identical_pairs
