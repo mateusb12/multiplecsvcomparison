@@ -52,6 +52,7 @@ def load_merged_csv() -> pd.DataFrame:
         relevant_columns = ['Type', 'Date', 'P1', 'Time1', 'P2', 'Time2']
         df.columns = relevant_columns
         df["Filename"] = filename
+        df = df.sort_values(by="P1")
         merged = pd.concat([merged, df], ignore_index=True)
 
     merged.dropna(axis=1, how='all', inplace=True)
