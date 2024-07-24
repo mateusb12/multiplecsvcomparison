@@ -7,37 +7,72 @@ from datetime import datetime
 
 def sanitize_df(df, comparison_range: int = 33):
     df = df[df['Type'] == 'ALL']
-    # Filtering out interruptions
-    df = df[(df['P1'] >= 0) & (df['P2'] >= 0)]
     df = df.copy()
     df.loc[:, "Diff"] = df["P1"] - df["P2"]
     # Filtering out only the pairs where the difference is >= comparison_range
-    df = df[df['Diff'].abs() >= comparison_range]
+    # df = df[df['Diff'].abs() >= comparison_range]
     return df
 
 
-def extract_unique_pairs(df):
+def extract_potential_unique_pairs(df):
     """Extract unique pairs from the sanitized dataframe."""
     unique_p1 = [float(item) for item in list(df['P1'].unique())]
     unique_p2 = [float(item) for item in list(df['P2'].unique())]
     unique_pairs = list(itertools.product(unique_p1, unique_p2))
-    return sorted(unique_pairs)
+    positive_only_pairs = list(filter(lambda x: x[0] > 0 and x[1] > 0, unique_pairs))
+    return sorted(positive_only_pairs)
+
+
+def check_for_interruptions(current_row, next_row):
+    """
+    Checks if there are any interruptions within the time window defined by start_time and end_time.
+
+    Args:
+    start_time (str): Start time in 'HH:MM' format.
+    end_time (str): End time in 'HH:MM' format.
+    cross_times (list): List of times in 'HH:MM' format that might interrupt the time window.
+
+    Returns:
+    bool: True if there is an interruption, False otherwise.
+    list: Times that cause the interruption.
+    """
+    start_time = current_row.Time1
+    end_time = next_row.Time2
+    cross_times = current_row.Time2, next_row.Time1
+    # Convert string times to datetime objects for comparison
+    start_dt = datetime.strptime(start_time, '%H:%M')
+    end_dt = datetime.strptime(end_time, '%H:%M')
+    cross_dt = [datetime.strptime(time, '%H:%M') for time in cross_times]
+
+    interruptions = [time.strftime('%H:%M') for time in cross_dt if start_dt < time < end_dt]
+    if len(interruptions) > 0:
+        print(f"Interruptions: {interruptions}")
+    return len(interruptions) > 0
 
 
 def generate_pair_occurrence_matrix(merged_df: pd.DataFrame, comparison_range: int = 33):
     """Generate a pair of occurrence matrix indicating which pairs appear in which files."""
     df = sanitize_df(merged_df, comparison_range)
     unique_files = list(df['Filename'].unique())
-    unique_pairs = extract_unique_pairs(df)
-    pair_dict = {pair: {filename: 0 for filename in unique_files} for pair in unique_pairs}
+    potential_pairs = extract_potential_unique_pairs(df)
+    pair_dict = {pair: {filename: 0 for filename in unique_files} for pair in potential_pairs}
 
     for filename in unique_files:
-        file_df = df[df['Filename'] == filename]
-        p1_values = sorted(list(file_df['P1'].tolist()))
-        p2_values = sorted(list(file_df['P2'].tolist()))
-        for pair in unique_pairs:
-            if pair[0] in p1_values and pair[1] in p2_values:
-                pair_dict[pair][filename] += 1
+        file_df = df[df['Filename'] == filename].reset_index(drop=True)
+        for index in range(len(file_df) - 1):
+            current_row = file_df.iloc[index]
+            new_row = file_df.iloc[index + 1]
+            pair = (current_row.P1, new_row.P2)
+            p1, p2 = pair
+            if p1 < 0 or p2 < 0:
+                continue
+            diff = abs(p2 - p1)
+            if diff < comparison_range:
+                continue
+            interruption = check_for_interruptions(current_row, new_row)
+            if interruption:
+                continue
+            pass
 
     debug_pair = (235.0, 202.0)
     debug_pair_occurrence = pair_dict[debug_pair]

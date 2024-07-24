@@ -3,6 +3,7 @@ import random
 from pathlib import Path
 from typing import List
 
+import numpy as np
 import pandas as pd
 
 
@@ -52,8 +53,17 @@ def load_merged_csv() -> pd.DataFrame:
         relevant_columns = ['Type', 'Date', 'P1', 'Time1', 'P2', 'Time2']
         df.columns = relevant_columns
         df["Filename"] = filename
-        df = df.sort_values(by="P1")
         merged = pd.concat([merged, df], ignore_index=True)
+
+    # Convert Time1 and Time2 to datetime once
+    merged['Time1'] = pd.to_datetime(merged['Time1'], format='%H:%M')
+    merged['Time2'] = pd.to_datetime(merged['Time2'], format='%H:%M')
+
+    merged['DIR'] = np.where(merged['Time1'] <= merged['Time2'], 'FORWARD', 'REVERSE')
+
+    # Reverse Time1 and Time2 columns to their original values
+    merged['Time1'] = merged['Time1'].dt.strftime('%H:%M')
+    merged['Time2'] = merged['Time2'].dt.strftime('%H:%M')
 
     merged.dropna(axis=1, how='all', inplace=True)
     return merged
