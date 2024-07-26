@@ -48,6 +48,7 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
     df = sanitize_df(merged_df, comparison_range)
     unique_files = list(df['Filename'].unique())
     occurrence_dict = {filename: 0 for filename in unique_files}
+    row_index_dict = {filename: 0 for filename in unique_files}
 
     for filename in unique_files:
         file_df = df[df['Filename'] == filename].reset_index(drop=False)
@@ -86,8 +87,9 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
             if not interruption_range_check:
                 break
             occurrence_dict[filename] += 1
+            row_index_dict[filename] = index
             break
-    return occurrence_dict
+    return occurrence_dict, row_index_dict
 
 
 def check_if_share_same_lowest_number(current_row_pair, next_row_pair):

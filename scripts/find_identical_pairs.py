@@ -15,16 +15,17 @@ def main():
     results = []
     for pair in primitive_pairs:
         p1, p2 = pair
-        occurrence_dict = generate_pair_occurrence_dict(merged_csv, (p1, p2), COMPARISON_RANGE)
-        pair_result = {"P1": p1, "P2": p2}
+        occurrence_dict, row_index_dict = generate_pair_occurrence_dict(merged_csv, (p1, p2), COMPARISON_RANGE)
+        pair_result = {"P1": p1, "P2": p2, "row_index_dict": row_index_dict}
         total_occurrences = 0
         for key, value in occurrence_dict.items():
             total_occurrences += value
         probability = total_occurrences / len(occurrence_dict.keys())
         pair_result["total_occurrences"] = total_occurrences
-        occurrence_dict["probability"] = probability
-        for key, value in occurrence_dict.items():
-            pair_result[key] = value
+        pair_result["probability"] = probability
+        for key_, value_ in occurrence_dict.items():
+            if key_.endswith('.csv'):
+                pair_result[key_] = value_
         results.append(pair_result)
     dataframe = pd.DataFrame(results)
     dataframe = move_column(dataframe, 'probability', 3)

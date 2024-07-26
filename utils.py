@@ -36,6 +36,9 @@ def move_column(dataframe, column, new_index):
     pd.DataFrame: A DataFrame with the column moved.
     """
     columns = list(dataframe.columns)
-    columns.remove(column)  # Remove the column from its current position
+    try:
+        columns.remove(column)  # Remove the column from its current position
+    except ValueError:
+        raise ValueError(f"Column '{column}' not found in the DataFrame with columns {columns}")
     columns.insert(new_index, column)  # Insert the column at the new index
     return dataframe[columns]
