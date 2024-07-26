@@ -34,8 +34,7 @@ def check_for_interruption_and_range(current_row, next_row, desired_pair, compar
     for pair_combination in non_overlapping_pairs:
         earliest_pair_timestamp = min(pair_combination, key=lambda x: x[0])[1]
         latest_pair_timestamp = max(pair_combination, key=lambda x: x[0])[1]
-        datapoints_inbetween_earliest_and_latest = [item for item in time_pot
-                                                    if earliest_pair_timestamp < item < latest_pair_timestamp]
+        datapoints_inbetween_earliest_and_latest = [item for item in time_pot if earliest_pair_timestamp < item < latest_pair_timestamp]
         if not datapoints_inbetween_earliest_and_latest:
             continue
         datapoint_values = [float(inverse_time_dict[item]) for item in datapoints_inbetween_earliest_and_latest]
@@ -58,12 +57,19 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
             current_row_pair = (float(current_row.P1), float(current_row.P2))
             while p1 not in current_row_pair:
                 index += 1
+                try:
+                    current_row = file_df.iloc[index]
+                except IndexError:
+                    break
                 current_row = file_df.iloc[index]
                 current_row_pair = (float(current_row.P1), float(current_row.P2))
             if p1 in current_row_pair and p2 in current_row_pair:
                 occurrence_dict[filename] += 1
                 break
-            next_row = file_df.iloc[index + 1]
+            try:
+                next_row = file_df.iloc[index + 1]
+            except IndexError:
+                break
             next_row_pair = (float(next_row.P1), float(next_row.P2))
             # share_same_lowest_number = check_if_share_same_lowest_number(current_row_pair, next_row_pair)
             # if share_same_lowest_number:

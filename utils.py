@@ -22,3 +22,20 @@ def filter_and_process_dataframe(df):
     # FIlter rows where both p1 and p2 are zero
     df = df[(df['p1'] != 0) & (df['p2'] != 0)]
     return df
+
+
+def move_column(dataframe, column, new_index):
+    """Move a column in the DataFrame to a new index.
+
+    Args:
+    dataframe (pd.DataFrame): The DataFrame to modify.
+    column (str): The name of the column to move.
+    new_index (int): The new index to move the column to.
+
+    Returns:
+    pd.DataFrame: A DataFrame with the column moved.
+    """
+    columns = list(dataframe.columns)
+    columns.remove(column)  # Remove the column from its current position
+    columns.insert(new_index, column)  # Insert the column at the new index
+    return dataframe[columns]
