@@ -59,11 +59,18 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
                 index += 1
                 current_row = file_df.iloc[index]
                 current_row_pair = (float(current_row.P1), float(current_row.P2))
-            if p1 and p2 in current_row_pair:
+            if p1 in pair and p2 in pair:
                 occurrence_dict[filename] += 1
                 break
             next_row = file_df.iloc[index + 1]
             next_row_pair = (float(next_row.P1), float(next_row.P2))
+            current_row_pair_lowest_number = min(current_row_pair)
+            next_row_pair_lowest_number = min(next_row_pair)
+            if current_row_pair_lowest_number == next_row_pair_lowest_number:
+                print("Found identical pair in file: " + filename)
+                print(current_row)
+                occurrence_dict[filename] += 1
+                break
             diff = get_diff_value(current_row, next_row)
             diff_check = diff >= comparison_range
             while not diff_check:
@@ -71,7 +78,6 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
                 diff_search_row = file_df.iloc[index]
                 diff = get_diff_value(current_row, diff_search_row)
                 diff_check = diff >= comparison_range
-            print("aa")
             has_interruption = check_for_interruption(current_row, next_row, pair, filename)
             if has_interruption:
                 break
