@@ -1,4 +1,5 @@
 import itertools
+from typing import Tuple
 
 import pandas as pd
 from path.csv_loader import load_all_csvs, load_merged_csv, get_root_folder_location
@@ -8,132 +9,84 @@ from datetime import datetime
 def sanitize_df(df, comparison_range: int = 33):
     df = df[df['Type'] == 'ALL']
     df = df.copy()
-    df.loc[:, "Diff"] = df["P1"] - df["P2"]
-    # Filtering out only the pairs where the difference is >= comparison_range
-    # df = df[df['Diff'].abs() >= comparison_range]
     return df
 
 
-def extract_potential_unique_pairs(df):
-    """Extract unique pairs from the sanitized dataframe."""
-    unique_p1 = [float(item) for item in list(df['P1'].unique())]
-    unique_p2 = [float(item) for item in list(df['P2'].unique())]
-    unique_pairs = list(itertools.product(unique_p1, unique_p2))
-    positive_only_pairs = list(filter(lambda x: x[0] >= 0 and x[1] >= 0, unique_pairs))
-    return sorted(positive_only_pairs)
-
-
-def check_for_interruptions(current_row, next_row):
-    """
-    Checks if there are any interruptions within the time window defined by start_time and end_time.
-
-    Args:
-    start_time (str): Start time in 'HH:MM' format.
-    end_time (str): End time in 'HH:MM' format.
-    cross_times (list): List of times in 'HH:MM' format that might interrupt the time window.
-
-    Returns:
-    bool: True if there is an interruption, False otherwise.
-    list: Times that cause the interruption.
-    """
-    start_time = current_row.Time1
-    end_time = next_row.Time2
-    cross_times = current_row.Time2, next_row.Time1
-    # Convert string times to datetime objects for comparison
-    start_dt = datetime.strptime(start_time, '%H:%M')
-    end_dt = datetime.strptime(end_time, '%H:%M')
-    cross_dt = [datetime.strptime(time, '%H:%M') for time in cross_times]
-
-    interruptions = [time.strftime('%H:%M') for time in cross_dt if start_dt < time < end_dt]
-    return len(interruptions) > 0
-
-
-def check_for_isolation(current_row, next_row) -> bool:
+def check_for_interruption(current_row, next_row, desired_pair, filename) -> bool:
     """
     Checks returns if there is any negative value between start_time and end_time.
     """
-    start_time = current_row.Time1
-    end_time = next_row.Time2
+    time_dict = {current_row.P1: current_row.Time1, current_row.P2: current_row.Time2,
+                 next_row.P1: next_row.Time1, next_row.P2: next_row.Time2}
+    inverse_time_dict = {value: key for key, value in time_dict.items()}
+    dp1, dp2 = desired_pair
+    try:
+        start_time = time_dict[dp1]
+        end_time = time_dict[dp2]
+    except KeyError:
+        start_time = time_dict[current_row.P1]
+        end_time = time_dict[next_row.P2]
 
-    # Create a dictionary to map times to their respective values
-    time_mapped_to_value = {
-        current_row.Time1: current_row.P1,
-        current_row.Time2: current_row.P2,
-        next_row.Time1: next_row.P1,
-        next_row.Time2: next_row.P2
-    }
+    time_pool = [datetime.strptime(time, "%H:%M") for time in [
+        current_row.Time1, current_row.Time2, next_row.Time1, next_row.Time2]]
+    datetime_start_time = datetime.strptime(start_time, "%H:%M")
+    datetime_end_time = datetime.strptime(end_time, "%H:%M")
 
-    # Convert the start and end times to datetime objects for comparison
-    start_datetime = datetime.strptime(start_time, '%H:%M')
-    end_datetime = datetime.strptime(end_time, '%H:%M')
+    time_between_start_and_end = []
+    # Check for times strictly between start_time and end_time
+    for time in time_pool:
+        if datetime_start_time < time < datetime_end_time:
+            decoded_time = time.strftime("%H:%M")
+            time_value = inverse_time_dict[decoded_time]
+            time_between_start_and_end.append(time_value)
 
-    # Extract times and values between start_time and end_time
-    times_between = [(time, value) for time, value in time_mapped_to_value.items()
-                     if start_datetime <= datetime.strptime(time, '%H:%M') <= end_datetime]
-
-    # Check for any negative value between start_time and end_time
-    for time, value in times_between:
-        if value < 0:
-            return False
-    return True
+    return any(x < 0 for x in time_between_start_and_end)
 
 
-def generate_pair_occurrence_matrix(merged_df: pd.DataFrame, comparison_range: int = 33):
+def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, float], comparison_range: int = 33):
     """Generate a pair of occurrence matrix indicating which pairs appear in which files."""
     df = sanitize_df(merged_df, comparison_range)
     unique_files = list(df['Filename'].unique())
-    potential_pairs = extract_potential_unique_pairs(df)
-    pair_dict = {pair: {filename: 0 for filename in unique_files} for pair in potential_pairs}
+    occurrence_dict = {filename: 0 for filename in unique_files}
 
     for filename in unique_files:
-        file_df = df[df['Filename'] == filename].reset_index(drop=True)
+        file_df = df[df['Filename'] == filename].reset_index(drop=False)
+        p1, p2 = pair
         for index in range(len(file_df) - 1):
             current_row = file_df.iloc[index]
-            new_row = file_df.iloc[index + 1]
-            # Conditional check
-            # filename == "old10-M20-orders-nosl-notp-out.csv" and pair == (202.0, 235.0)
-            pair = (current_row.P1, new_row.P2)
-            p1, p2 = pair
-            test_pair = pair == (202.0, 235.0)
-            if p1 < 0 or p2 < 0:
-                continue
-            diff = abs(p2 - p1)
-            if diff < comparison_range:
-                if test_pair:
-                    print(f"Test pair failed on diff {filename}")
-                continue
-            interruption = check_for_interruptions(current_row, new_row)
-            if interruption:
-                if test_pair:
-                    print(f"Test pair failed on interruption {filename}")
-                continue
-            isolation = check_for_isolation(current_row, new_row)
-            if not isolation:
-                if test_pair:
-                    print(f"Test pair failed on isolation {filename}")
-                continue
-            pair_dict[pair][filename] += 1
-    # filtered_pair_dict = {
-    #     pair: inner_dict
-    #     for pair, inner_dict in pair_dict.items()
-    #     if any(value != 0 for value in inner_dict.values())
-    # }
-    # sorted_pair_dict = dict(sorted(
-    #     filtered_pair_dict.items(),
-    #     key=lambda item: sum(1 for val in item[1].values() if val == 1),
-    #     reverse=True
-    # ))
-    debug_pair = (202.0, 235.0)
-    debug_pair_occurrence = pair_dict[debug_pair]
-    # Convert the pair dictionary to a DataFrame
-    matrix_df = pd.DataFrame.from_dict(pair_dict, orient='index')
-    matrix_df['Pair'] = matrix_df.index  # Explicitly create 'Pair' column
-    matrix_df.reset_index(drop=True, inplace=True)
+            current_row_pair = (float(current_row.P1), float(current_row.P2))
+            while p1 not in current_row_pair:
+                index += 1
+                current_row = file_df.iloc[index]
+                current_row_pair = (float(current_row.P1), float(current_row.P2))
+            if p1 and p2 in current_row_pair:
+                occurrence_dict[filename] += 1
+                break
+            next_row = file_df.iloc[index + 1]
+            next_row_pair = (float(next_row.P1), float(next_row.P2))
+            diff = get_diff_value(current_row, next_row)
+            diff_check = diff >= comparison_range
+            while not diff_check:
+                index += 1
+                diff_search_row = file_df.iloc[index]
+                diff = get_diff_value(current_row, diff_search_row)
+                diff_check = diff >= comparison_range
+            print("aa")
+            has_interruption = check_for_interruption(current_row, next_row, pair, filename)
+            if has_interruption:
+                break
+            occurrence_dict[filename] += 1
+            break
+    return occurrence_dict
 
-    print("Matrix DataFrame structure:")
-    print(matrix_df.head())  # Debugging line to check the structure of matrix_df
 
-    return matrix_df
+def get_diff_value(current_row: pd.Series, next_row: pd.Series) -> float:
+    time_dict = {current_row.Time1: current_row.P1, current_row.Time2: current_row.P2,
+                 next_row.Time1: next_row.P1, next_row.Time2: next_row.P2}
+    earliest_time = min(time_dict, key=lambda x: time_dict[x])
+    latest_time = max(time_dict, key=lambda x: time_dict[x])
+    diff = abs(time_dict[latest_time] - time_dict[earliest_time])
+    return diff
 
 
 def format_date(date_str):
@@ -202,8 +155,9 @@ def save_results_to_csv(df):
 
 def main():
     comparison_range = 33
+    pair = (202.0, 235.0)
     merged_csv = load_merged_csv()
-    matrix_df = generate_pair_occurrence_matrix(merged_csv, comparison_range)
+    matrix_df = generate_pair_occurrence_dict(merged_csv, pair, comparison_range)
     pairs = find_identical_pairs(matrix_df, merged_csv)  # Pass merged_csv to find_identical_pairs
     save_results_to_csv(pairs)
     return pairs
