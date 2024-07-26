@@ -2,7 +2,8 @@ import itertools
 from typing import Tuple
 
 import pandas as pd
-from path.csv_loader import load_all_csvs, load_merged_csv, get_root_folder_location
+
+from path.csv_loader import load_merged_csv, get_root_folder_location
 from datetime import datetime
 
 
@@ -12,35 +13,35 @@ def sanitize_df(df, comparison_range: int = 33):
     return df
 
 
-def check_for_interruption(current_row, next_row, desired_pair, filename) -> bool:
+def check_for_interruption_and_range(current_row, next_row, desired_pair, comparison_range, filename) -> bool:
     """
     Checks returns if there is any negative value between start_time and end_time.
     """
+
+    def generate_permutations(input_time_dict):
+        items = list(input_time_dict.items())
+        pair_combinations = list(itertools.combinations(items, 2))
+        return [((float(pair[0][0]), pair[0][1]), (float(pair[1][0]), pair[1][1])) for pair in pair_combinations]
+
     time_dict = {current_row.P1: current_row.Time1, current_row.P2: current_row.Time2,
                  next_row.P1: next_row.Time1, next_row.P2: next_row.Time2}
     inverse_time_dict = {value: key for key, value in time_dict.items()}
+    time_pot = sorted(time_dict.values())
     dp1, dp2 = desired_pair
-    try:
-        start_time = time_dict[dp1]
-        end_time = time_dict[dp2]
-    except KeyError:
-        start_time = time_dict[current_row.P1]
-        end_time = time_dict[next_row.P2]
-
-    time_pool = [datetime.strptime(time, "%H:%M") for time in [
-        current_row.Time1, current_row.Time2, next_row.Time1, next_row.Time2]]
-    datetime_start_time = datetime.strptime(start_time, "%H:%M")
-    datetime_end_time = datetime.strptime(end_time, "%H:%M")
-
-    time_between_start_and_end = []
-    # Check for times strictly between start_time and end_time
-    for time in time_pool:
-        if datetime_start_time < time < datetime_end_time:
-            decoded_time = time.strftime("%H:%M")
-            time_value = inverse_time_dict[decoded_time]
-            time_between_start_and_end.append(time_value)
-
-    return any(x < 0 for x in time_between_start_and_end)
+    combinations = generate_permutations(time_dict)
+    pairs_meeting_threshold = [comb for comb in combinations if abs(comb[1][0] - comb[0][0]) >= comparison_range]
+    non_overlapping_pairs = [comb for comb in pairs_meeting_threshold if not any(x in comb[1] for x in comb[0]) and not any(x in comb[0] for x in comb[1])]
+    for pair_combination in non_overlapping_pairs:
+        earliest_pair_timestamp = min(pair_combination, key=lambda x: x[0])[1]
+        latest_pair_timestamp = max(pair_combination, key=lambda x: x[0])[1]
+        datapoints_inbetween_earliest_and_latest = [item for item in time_pot
+                                                    if earliest_pair_timestamp < item < latest_pair_timestamp]
+        if not datapoints_inbetween_earliest_and_latest:
+            continue
+        datapoint_values = [float(inverse_time_dict[item]) for item in datapoints_inbetween_earliest_and_latest]
+        if any(number < 0 for number in datapoint_values):
+            return False
+    return True
 
 
 def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, float], comparison_range: int = 33):
@@ -59,31 +60,35 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
                 index += 1
                 current_row = file_df.iloc[index]
                 current_row_pair = (float(current_row.P1), float(current_row.P2))
-            if p1 in pair and p2 in pair:
+            if p1 in current_row_pair and p2 in current_row_pair:
                 occurrence_dict[filename] += 1
                 break
             next_row = file_df.iloc[index + 1]
             next_row_pair = (float(next_row.P1), float(next_row.P2))
-            current_row_pair_lowest_number = min(current_row_pair)
-            next_row_pair_lowest_number = min(next_row_pair)
-            if current_row_pair_lowest_number == next_row_pair_lowest_number:
-                print("Found identical pair in file: " + filename)
-                print(current_row)
-                occurrence_dict[filename] += 1
-                break
-            diff = get_diff_value(current_row, next_row)
-            diff_check = diff >= comparison_range
-            while not diff_check:
-                index += 1
-                diff_search_row = file_df.iloc[index]
-                diff = get_diff_value(current_row, diff_search_row)
-                diff_check = diff >= comparison_range
-            has_interruption = check_for_interruption(current_row, next_row, pair, filename)
-            if has_interruption:
+            # share_same_lowest_number = check_if_share_same_lowest_number(current_row_pair, next_row_pair)
+            # if share_same_lowest_number:
+            #     occurrence_dict[filename] += 1
+            #     break
+            # diff = get_diff_value(current_row, next_row)
+            # diff_check = diff >= comparison_range
+            # while not diff_check:
+            #     index += 1
+            #     diff_search_row = file_df.iloc[index]
+            #     diff = get_diff_value(current_row, diff_search_row)
+            #     diff_check = diff >= comparison_range
+            interruption_range_check = check_for_interruption_and_range(current_row, next_row, pair, comparison_range, filename)
+            if not interruption_range_check:
                 break
             occurrence_dict[filename] += 1
             break
     return occurrence_dict
+
+
+def check_if_share_same_lowest_number(current_row_pair, next_row_pair):
+    current_row_pair_lowest_number = min(current_row_pair)
+    next_row_pair_lowest_number = min(next_row_pair)
+    share_same_lowest_number = current_row_pair_lowest_number == next_row_pair_lowest_number
+    return share_same_lowest_number
 
 
 def get_diff_value(current_row: pd.Series, next_row: pd.Series) -> float:
@@ -164,8 +169,6 @@ def main():
     pair = (202.0, 235.0)
     merged_csv = load_merged_csv()
     matrix_df = generate_pair_occurrence_dict(merged_csv, pair, comparison_range)
-    pairs = find_identical_pairs(matrix_df, merged_csv)  # Pass merged_csv to find_identical_pairs
-    save_results_to_csv(pairs)
     return pairs
 
 
