@@ -49,7 +49,7 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
     df = sanitize_df(merged_df, comparison_range)
     unique_files = list(df['Filename'].unique())
     occurrence_dict = {filename: 0 for filename in unique_files}
-    row_index_dict = {filename: 0 for filename in unique_files}
+    row_index_dict = {filename: {"p1_location": 0, "p2_location": 0} for filename in unique_files}
 
     for filename in unique_files:
         file_df = df[df['Filename'] == filename].reset_index(drop=False)
@@ -67,7 +67,8 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
                 current_row_pair = (float(current_row.P1), float(current_row.P2))
             if p1 in current_row_pair and p2 in current_row_pair:
                 occurrence_dict[filename] += 1
-                row_index_dict[filename] = current_row['original_index']
+                location = int(current_row['original_index'])
+                row_index_dict[filename] = {"p1_location": location, "p2_location": location}
                 break
             try:
                 next_row = file_df.iloc[index + 1]
@@ -96,7 +97,9 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
             if not interruption_range_check:
                 break
             occurrence_dict[filename] += 1
-            row_index_dict[filename] = current_row['original_index']
+            p1_location = int(current_row['original_index'])
+            p2_location = int(next_row['original_index'])
+            row_index_dict[filename] = {"p1_location": p1_location, "p2_location": p2_location}
             break
     return occurrence_dict, row_index_dict
 
@@ -121,56 +124,6 @@ def format_date(date_str):
     """Convert date string to long date format."""
     date_obj = datetime.strptime(date_str, '%Y.%m.%d')
     return date_obj.strftime('%d %B %Y')
-
-
-def find_identical_pairs(matrix_df: pd.DataFrame, original_df: pd.DataFrame):
-    """Find identical pairs using the pair occurrence matrix, comparing against other files."""
-    if 'Pair' not in matrix_df.columns:
-        raise KeyError("'Pair' column is not found in the DataFrame")
-
-    results = []
-    total_files = matrix_df.columns.size - 1  # excluding the 'Pair' column
-
-    for index, row in matrix_df.iterrows():
-        pair = row['Pair']
-        files_with_pair = row.drop('Pair')  # excluding the 'Pair' column
-        other_files = files_with_pair[files_with_pair == 1].index.tolist()
-        other_files_count = len(other_files)
-
-        if other_files_count > 0:
-            probability = other_files_count / total_files * 100
-            p1, p2 = pair
-            diff = p1 - p2
-            # Extract time and date for P1 and P2 from the original dataframe
-            p1_time = original_df.loc[(original_df['P1'] == p1) & (original_df['P2'] == p2), 'Time1'].values[0]
-            p1_date = original_df.loc[(original_df['P1'] == p1) & (original_df['P2'] == p2), 'Date'].values[0]
-            p2_time = original_df.loc[(original_df['P1'] == p1) & (original_df['P2'] == p2), 'Time2'].values[0]
-            p2_date = original_df.loc[(original_df['P1'] == p1) & (original_df['P2'] == p2), 'Date'].values[0]
-
-            # Create full timestamps
-            p1_timestamp = datetime.strptime(f"{p1_date} {p1_time}", '%Y.%m.%d %H:%M')
-            p2_timestamp = datetime.strptime(f"{p2_date} {p2_time}", '%Y.%m.%d %H:%M')
-
-            dir_value = "REVERSE" if p1_timestamp > p2_timestamp else "FORWARD"
-            p1_long_date = format_date(p1_date)
-            p2_long_date = format_date(p2_date)
-            results.append({
-                "P1": int(p1),
-                "P2": int(p2),
-                'Diff': int(diff),
-                "Probability": f"{probability:.2f}%",
-                "Amount of files with this pair": other_files_count,
-                "Files": ','.join(other_files),
-                "DIR": dir_value,  # Add DIR value based on time comparison
-                "P1_time": p1_time,
-                "P1_date": p1_date,
-                "P1_long_date": p1_long_date,
-                "P2_time": p2_time,
-                "P2_date": p2_date,
-                "P2_long_date": p2_long_date
-            })
-    results.sort(key=lambda x: x['Probability'], reverse=True)
-    return pd.DataFrame(results)
 
 
 def save_results_to_csv(df):
