@@ -29,8 +29,8 @@ def main():
             match = re.search(r'([a-zA-Z]+\.csv)$', occurrence_key)
             if match:
                 tag = match.group(1)
-                pair_result[f"{tag} row index"] = row_index_dict[occurrence_key] + 1
                 pair_result[f"{tag} total occurrences"] = occurrence_value
+                pair_result[f"{tag} row location"] = row_index_dict[occurrence_key] + 1 if occurrence_value != 0 else "None"
         results.append(pair_result)
     dataframe = pd.DataFrame(results)
     dataframe = move_column(dataframe, 'probability', 3)

@@ -8,8 +8,9 @@ from datetime import datetime
 
 
 def sanitize_df(df, comparison_range: int = 33):
-    df = df[df['Type'] == 'ALL']
-    df = df.copy()
+    df = df[df['Type'] == 'ALL'].copy()
+    df.reset_index(drop=False, inplace=True)
+    df.rename(columns={'index': 'original_index'}, inplace=True)
     return df
 
 
@@ -66,12 +67,20 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
                 current_row_pair = (float(current_row.P1), float(current_row.P2))
             if p1 in current_row_pair and p2 in current_row_pair:
                 occurrence_dict[filename] += 1
+                row_index_dict[filename] = current_row['original_index']
                 break
             try:
                 next_row = file_df.iloc[index + 1]
             except IndexError:
                 break
             next_row_pair = (float(next_row.P1), float(next_row.P2))
+            while p2 not in next_row_pair:
+                index += 1
+                try:
+                    next_row = file_df.iloc[index]
+                except IndexError:
+                    break
+                next_row_pair = (float(next_row.P1), float(next_row.P2))
             # share_same_lowest_number = check_if_share_same_lowest_number(current_row_pair, next_row_pair)
             # if share_same_lowest_number:
             #     occurrence_dict[filename] += 1
@@ -87,7 +96,7 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
             if not interruption_range_check:
                 break
             occurrence_dict[filename] += 1
-            row_index_dict[filename] = index
+            row_index_dict[filename] = current_row['original_index']
             break
     return occurrence_dict, row_index_dict
 
