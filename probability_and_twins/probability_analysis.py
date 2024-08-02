@@ -56,8 +56,6 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
         file_df = df[df['Filename'] == filename].reset_index(drop=False)
         p1, p2 = pair
         for index in range(len(file_df) - 1):
-            if filename == "old10-M20-orders-nosl-notp-Ma1.csv":
-                print(f"index {index}")
             current_row = file_df.iloc[index]
             current_row_pair = (float(current_row.P1), float(current_row.P2))
             while p1 not in current_row_pair:
@@ -77,15 +75,16 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
                 location = int(matching_rows.index[0] + 2)
                 row_index_dict[filename] = {"p1_location": location, "p2_location": location}
                 break
+            next_row_index = index + 1
             try:
-                next_row = file_df.iloc[index + 1]
+                next_row = file_df.iloc[next_row_index]
             except IndexError:
                 break
             next_row_pair = (float(next_row.P1), float(next_row.P2))
             while p2 not in next_row_pair:
-                index += 1
+                next_row_index += 1
                 try:
-                    next_row = file_df.iloc[index]
+                    next_row = file_df.iloc[next_row_index]
                 except IndexError:
                     break
                 next_row_pair = (float(next_row.P1), float(next_row.P2))
@@ -104,8 +103,14 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
             if not interruption_range_check:
                 break
             occurrence_dict[filename] += 1
-            p1_location = int(current_row['original_index'])
-            p2_location = int(next_row['original_index'])
+            p1_mask = (original_df['P1'] == current_row['P1']) & (original_df['P2'] == current_row['P2'])
+            p1_matching_rows = original_df[p1_mask]
+            p1_location = int(p1_matching_rows.index[0])
+            # p1_location = int(current_row['original_index'])
+            # p2_location = int(next_row['original_index'])
+            p2_mask = (original_df['P1'] == next_row['P1']) & (original_df['P2'] == next_row['P2'])
+            p2_matching_rows = original_df[p2_mask]
+            p2_location = int(p2_matching_rows.index[0])
             row_index_dict[filename] = {"p1_location": p1_location + 2, "p2_location": p2_location + 2}
             break
     return occurrence_dict, row_index_dict
