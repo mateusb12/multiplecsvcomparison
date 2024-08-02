@@ -52,9 +52,12 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
     row_index_dict = {filename: {"p1_location": 0, "p2_location": 0} for filename in unique_files}
 
     for filename in unique_files:
+        original_df = merged_df[merged_df['Filename'] == filename].reset_index(drop=True)
         file_df = df[df['Filename'] == filename].reset_index(drop=False)
         p1, p2 = pair
         for index in range(len(file_df) - 1):
+            if filename == "old10-M20-orders-nosl-notp-Ma1.csv":
+                print(f"index {index}")
             current_row = file_df.iloc[index]
             current_row_pair = (float(current_row.P1), float(current_row.P2))
             while p1 not in current_row_pair:
@@ -67,7 +70,11 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
                 current_row_pair = (float(current_row.P1), float(current_row.P2))
             if p1 in current_row_pair and p2 in current_row_pair:
                 occurrence_dict[filename] += 1
-                location = int(current_row['original_index'])
+                mask = (original_df['P1'] == current_row['P1']) & (original_df['P2'] == current_row['P2'])
+                matching_rows = original_df[mask]
+                if matching_rows.empty:
+                    raise ValueError("No matching rows found")
+                location = int(matching_rows.index[0] + 2)
                 row_index_dict[filename] = {"p1_location": location, "p2_location": location}
                 break
             try:
@@ -99,7 +106,7 @@ def generate_pair_occurrence_dict(merged_df: pd.DataFrame, pair: Tuple[float, fl
             occurrence_dict[filename] += 1
             p1_location = int(current_row['original_index'])
             p2_location = int(next_row['original_index'])
-            row_index_dict[filename] = {"p1_location": p1_location, "p2_location": p2_location}
+            row_index_dict[filename] = {"p1_location": p1_location + 2, "p2_location": p2_location + 2}
             break
     return occurrence_dict, row_index_dict
 
