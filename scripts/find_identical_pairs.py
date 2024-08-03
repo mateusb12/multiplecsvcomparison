@@ -19,12 +19,12 @@ def main():
     for pair in primitive_pairs:
         p1, p2 = pair
         _range = p2 - p1
-        # print(f"p1: {p1}, p2: {p2}, range: {_range}")
+        print(f"p1: {p1}, p2: {p2}, range: {_range}")
         occurrence_dict, row_index_dict = generate_pair_occurrence_dict(merged_csv, (p1, p2), _range)
         pair_result = {"P1": p1, "P2": p2, "total_occurrences": 0, "probability": 0}
         total_occurrences = 0
         for occurrence_key, occurrence_value in occurrence_dict.items():
-            match = re.search(r'([a-zA-Z]+\.csv)$', occurrence_key)
+            match = re.search(r'([^-]+\.csv)$', occurrence_key)
             if match:
                 tag = match.group(1)
                 pair_result[f"{tag} total occurrences"] = occurrence_value
